@@ -56,5 +56,22 @@ describe("UserManager contract test -------------", function () {
     });
   });
 
+  describe("User creation", function () {
+    it("Should be able to create a user", async function () {
+      await userManagerContract.createUser(
+        "bob",
+        "bob",
+        5454545454,
+        "bob@bob.bob",
+        22,
+        "QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD",
+        "https://github.com/Simon-Busch",
+        "worker"
+      );
+      const userList = await userManagerContract.getAllUsers();
+      expect(userList.length).to.equal(2);
+    });
+  })
+
 
 });
