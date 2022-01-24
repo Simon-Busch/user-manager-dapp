@@ -50,7 +50,13 @@ contract UserManager {
     }
 
     function updateUser(uint id, string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash, string[] memory _tag) public {
-
+        users[id].name = _name;
+        users[id].lastName = _lastName;
+        users[id].telephoneNumber = _telephoneNumber;
+        users[id].email = _email;
+        users[id].age = _age;
+        users[id].ipfsHash = _ipfsHash;
+        users[id].tags = _tag;
     }
 
     function deleteUser(uint _id) public {
