@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import UserList from './components/UserList/UserList';
 import Greetings from './components/Greetings/Greetings';
+import Button from './components/UI/Button/Button';
 
 declare let window: any;
 
@@ -73,12 +74,23 @@ const App: React.FC = () => {
   return (
     <div className="user-manager__main-container">
       <h1 className="main-title">User Manager</h1>
-        {
-          currentAccount ? 
-          <Greetings account={currentAccount}/>
-          : ''
-        }
-      <UserList />
+      {
+        isLoading === false ? 
+        <>
+          {
+            currentAccount !== null ? 
+            <Greetings account={currentAccount}/>
+            : 
+            <Button 
+              onAction={connectWalletAction}
+              text={"Connect your wallet 🦊"}
+            />
+          }
+          <UserList />
+        </>
+          :
+        <p className="paragraph-grey"> Loading ...</p>
+      }
     </div>
   );
 }

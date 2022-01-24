@@ -1,0 +1,17 @@
+.button {
+  padding: .4rem .5rem;
+  border: 2px solid rgb(32,56,76);
+  transition: all .3s ease;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button:hover {
+  transform: scale(1.1);
+  border: 2px solid rgb(92,186, 216);
+}
+
+.button:hover > p {
+  color: white;
+  font-size: 16px;
+}
