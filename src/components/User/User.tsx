@@ -1,21 +1,8 @@
 import React from 'react';
+import { UserModel } from '../../model/User.model';
 import './User.css';
 
-
-interface UserProps {
-  id: number;
-  name: string;
-  lastName: string;
-  telephoneNumber: number;
-  email: string;
-  age: number;
-  ipfsHash: string;
-  personalLink: string;
-  tags: string[];
-}
-
-const User: React.FC<UserProps> = (props) => {
-  console.log(props)
+const User: React.FC<UserModel> = (props) => {
   return (
     <div className="user-container">
       <div className="user-container-1">

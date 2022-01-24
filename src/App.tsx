@@ -3,8 +3,20 @@ import './App.css';
 import UserList from './components/UserList/UserList';
 import Greetings from './components/Greetings/Greetings';
 import Button from './components/UI/Button/Button';
-
+import { UserModel } from './model/User.model';
 declare let window: any;
+
+const dummyData: UserModel[] = [{
+  id: 1,
+  name: "Simon",
+  lastName: "Busch",
+  telephoneNumber: 123456789,
+  email: "simon@simon.com",
+  age: 32,
+  ipfsHash: "QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD",
+  personalLink: "https://github.com/Simon-Busch",
+  tags:['frontend engineer', 'blockchain dev', 'solidity lover'],
+}]
 
 const App: React.FC = () => {
   const [ currentAccount, setCurrentAccount ] = useState<string | null>(null);
@@ -86,7 +98,9 @@ const App: React.FC = () => {
               text={"Connect your wallet 🦊"}
             />
           }
-          <UserList />
+          <UserList 
+            usersList={dummyData}
+          />
         </>
           :
         <p className="paragraph-grey"> Loading ...</p>

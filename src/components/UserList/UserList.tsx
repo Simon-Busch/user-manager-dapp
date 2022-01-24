@@ -1,21 +1,30 @@
 import React from 'react';
 import User from '../User/User';
+import { UserModel } from '../../model/User.model';
 import './UserList.css';
 
-const UserList = () => {
+interface UserListProps {
+  usersList: UserModel[];
+}
+
+const UserList: React.FC<UserListProps> = (props) => {
   return (
     <ul>
-      <User 
-        id={1}
-        name={"Simon"}
-        lastName={"Busch"}
-        telephoneNumber={123456789}
-        email={"simon@simon.com"}
-        age={32}
-        ipfsHash={"QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD"}
-        personalLink={"https://github.com/Simon-Busch"}
-        tags={["frontend engineer", "blockchain dev", "solidity lover"]}
-      />
+      {props.usersList.map((user) => {
+        return (
+          <User 
+            id={user.id}
+            name={user.name}
+            lastName={user.lastName}
+            telephoneNumber={user.telephoneNumber}
+            email={user.email}
+            age={user.age}
+            ipfsHash={user.ipfsHash}
+            personalLink={user.personalLink}
+            tags={user.tags}
+          />
+        )
+      })}
     </ul>
   );
 };
