@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import {ethers} from 'ethers';
 import UserList from './components/UserList/UserList';
 import Greetings from './components/Greetings/Greetings';
 import Button from './components/UI/Button/Button';
 import { UserModel } from './model/User.model';
+import UserManagerContractABI from "./artifacts/contracts/UserManager.sol/UserManager.json";
 declare let window: any;
 
 const dummyData: UserModel[] = [{
@@ -21,7 +23,8 @@ const dummyData: UserModel[] = [{
 const App: React.FC = () => {
   const [ currentAccount, setCurrentAccount ] = useState<string | null>(null);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
-  const USER_MANAGER_CONTRACT_ADDRESS:string = "0x5FA0A3AB6744ac45322a1f5ff0649BE27b38D3c2";
+  const [userManagerContract, setUserManagerContract] = useState<any>(null);
+  const USER_MANAGER_CONTRACT_ADDRESS:string = "0x79f11f932868613D43216497eF103FD41F55c5f4";
 
   const checkIfWalletIsConnected = async () => {
 		try {
@@ -78,10 +81,30 @@ const App: React.FC = () => {
 		}
 	};
 
+  //check if the wallet is connected
   useEffect(() => {
     checkIfWalletIsConnected();
     setIsLoading(false);
   }, []);
+
+  //get the contract instance
+  useEffect(() => {
+    let ethereum: any;
+    ethereum = window.ethereum;
+
+		if (ethereum) {
+			const provider = new ethers.providers.Web3Provider(ethereum);
+			const signer = provider.getSigner();
+			const userManagerContractEther = new ethers.Contract(USER_MANAGER_CONTRACT_ADDRESS, UserManagerContractABI.abi, signer);
+			setUserManagerContract(userManagerContractEther);
+      setIsLoading(false);
+		} else {
+			console.log('Ethereum object not found');
+      setIsLoading(false);
+		}
+	}, []);
+
+
   
   return (
     <div className="user-manager__main-container">
