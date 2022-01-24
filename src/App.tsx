@@ -6,7 +6,6 @@ import Greetings from './components/Greetings/Greetings';
 import Button from './components/UI/Button/Button';
 import UserCreation from './components/UserCreation/UserCreation'
 import { UserModel } from './model/User.model';
-import ipfs from './utils/ipfs';
 import UserManagerContractABI from "./artifacts/contracts/UserManager.sol/UserManager.json";
 declare let window: any;
 
@@ -98,6 +97,7 @@ const App: React.FC = () => {
 			const signer = provider.getSigner();
 			const userManagerContractEther = new ethers.Contract(USER_MANAGER_CONTRACT_ADDRESS, UserManagerContractABI.abi, signer);
 			setUserManagerContract(userManagerContractEther);
+      console.log(userManagerContract);
       setIsLoading(false);
 		} else {
 			console.log('Ethereum object not found');
@@ -105,6 +105,9 @@ const App: React.FC = () => {
 		}
 	}, []);
 
+  const addUserHandler = () => {
+    console.log('add user handler')
+  }
 
   
   return (
@@ -122,7 +125,7 @@ const App: React.FC = () => {
               text={"Connect your wallet 🦊"}
             />
           }
-          <UserCreation />
+          <UserCreation onAddUser={addUserHandler} />
           <UserList 
             usersList={dummyData}
           />

@@ -13,8 +13,7 @@ const UserList: React.FC<UserListProps> = (props) => {
       {props.usersList.map((user) => {
         return (
           <User
-            key={user.id}
-            id={user.id}
+            key={Math.random()*155555}
             name={user.name}
             lastName={user.lastName}
             telephoneNumber={user.telephoneNumber}

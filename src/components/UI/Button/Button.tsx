@@ -2,7 +2,7 @@ import React from 'react';
 import './Button.css';
 
 interface ButtonProps {
-  onAction: () => void;
+  onAction: (event?: any) => void;
   text: string;
   // size: string;
 }
