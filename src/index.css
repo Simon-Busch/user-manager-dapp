@@ -11,3 +11,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Typography definition */
+
+.paragraph-grey {
+  color: rgb(82,115,124);
+  font-size: 16px;
+}

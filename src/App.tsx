@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import UserList from './components/UserList/UserList';
+import Greetings from './components/Greetings/Greetings';
 
 declare let window: any;
 
@@ -72,6 +73,11 @@ const App: React.FC = () => {
   return (
     <div className="user-manager__main-container">
       <h1 className="main-title">User Manager</h1>
+        {
+          currentAccount ? 
+          <Greetings account={currentAccount}/>
+          : ''
+        }
       <UserList />
     </div>
   );
