@@ -62,6 +62,6 @@ contract UserManager {
     }
 
     function deleteUser(uint _id) public {
-        delete users[id];
+        delete users[_id];
     }
 }
