@@ -9,7 +9,7 @@ interface userCreationProps {
   onAddUser: (createdUser: UserModel) => void;
 }
 
-const UserCreation: React.FC<userCreationProps> = () => {
+const UserCreation: React.FC<userCreationProps> = ({onAddUser}) => {
   const [ipfsHash, setIpfsHash] = useState<string>('');
   const nameInputRef = useRef<HTMLInputElement>(null);
   const lastNameInputRef = useRef<HTMLInputElement>(null);
@@ -34,6 +34,7 @@ const UserCreation: React.FC<userCreationProps> = () => {
       ipfsHash:ipfsHash,
       tags: tagsArray
     }
+    onAddUser(createdUser);
   }
 
   const captureHandler = (text: string) => {

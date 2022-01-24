@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../Button/Button';
 import './Input.css';
 
 interface InputProps {
@@ -14,10 +13,6 @@ const Input: React.FC<InputProps> = (props) => {
     <div className="input-container">
       <label>{props.label} </label>
       <input type={props.type} ref={props.reference} required />
-      {/* {
-        props.type === "file" ?
-        <Button text="Upload" onAction={props.onChangeHandler} /> : ''
-      } */}
     </div>
   );
 };
