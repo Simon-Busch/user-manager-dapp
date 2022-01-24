@@ -12,6 +12,7 @@ contract UserManager {
         string email;
         uint age;
         string ipfsHash;
+        string personalLink;
         string[] tags;
     }
 
@@ -23,7 +24,7 @@ contract UserManager {
 
     constructor() {
         userId = 0;
-        createUser("Simon","Busch",44784544654,"simon.busch@live.fr",32,"QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD","solidity");
+        createUser("Simon","Busch",44784544654,"simon.busch@live.fr",32,"QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD","https://github.com/Simon-Busch","solidity");
         userId += 1;
     }
 
@@ -35,7 +36,7 @@ contract UserManager {
         return users[_id];
     }
 
-    function createUser(string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash, string memory _tag) public {
+    function createUser(string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash,string memory _personalLink, string memory _tag) public {
         User memory newUser = User({
             id: userId,
             name: _name,
@@ -44,6 +45,7 @@ contract UserManager {
             email: _email,
             age: _age,
             ipfsHash: _ipfsHash,
+            personalLink: _personalLink,
             tags: new string[](0)
         });
 
@@ -51,13 +53,14 @@ contract UserManager {
         users[users.length-1].tags.push(_tag);
     }
 
-    function updateUser(uint id, string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash, string[] memory _tag) public {
+    function updateUser(uint id, string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash,string memory _personalLink, string[] memory _tag) public {
         users[id].name = _name;
         users[id].lastName = _lastName;
         users[id].telephoneNumber = _telephoneNumber;
         users[id].email = _email;
         users[id].age = _age;
         users[id].ipfsHash = _ipfsHash;
+        users[id].personalLink = _personalLink;
         users[id].tags = _tag;
     }
 
