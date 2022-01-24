@@ -10,7 +10,6 @@ interface userCreationProps {
 }
 
 const UserCreation: React.FC<userCreationProps> = () => {
-  // const [buffer,setBuffer] = useState<Buffer | string>('');
   const [ipfsHash, setIpfsHash] = useState<string>('');
   const nameInputRef = useRef<HTMLInputElement>(null);
   const lastNameInputRef = useRef<HTMLInputElement>(null);
@@ -53,8 +52,8 @@ const UserCreation: React.FC<userCreationProps> = () => {
         <Input label={'Enter your user personnal link'} reference={personnalLinkInputRef} type={'text'} />
         <Input label={'Enter your user tag'} reference={tagInputRef} type={'text'} />
         <Capture onCapture={captureHandler} />
-        <Button text={"Submit"} onAction={formHandler} />
       </div>
+      <Button text={"Submit"} onAction={formHandler} />
     </div>
   );
 };
