@@ -23,6 +23,8 @@ contract UserManager {
 
     constructor() {
         userId = 0;
+        createUser("Simon","Busch",44784544654,"simon.busch@live.fr",32,"QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD","solidity");
+        userId += 1;
     }
 
     function getAllUsers() external view returns (User[] memory) {
