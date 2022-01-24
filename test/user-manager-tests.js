@@ -22,21 +22,39 @@ describe("UserManager contract test -------------", function () {
       const userList = await userManagerContract.getAllUsers(); 
       expect(+userList[0].id).to.equal(0);
     });
-    it("First user should have an array of 1 tag", async function () {
-      const userList = await userManagerContract.getAllUsers();
-      expect(+userList[0].tags.length).to.equal(1);
-    });
     it("First user should have a name of type string ", async function () {
       const userList = await userManagerContract.getAllUsers();      
       expect(userList[0].name).to.be.a("string");
     });
-    it("First user should have a personnal link of type string ", async function () {
+    it("First user should have a last name of type string ", async function () {
       const userList = await userManagerContract.getAllUsers();      
-      expect(userList[0].personalLink).to.be.a("string");
+      expect(userList[0].lastName).to.be.a("string");
     });
     it("First user should telephone number of type number ", async function () {
       const userList = await userManagerContract.getAllUsers();      
       expect(userList[0].telephoneNumber.toNumber()).to.be.a("number");
     });
+    it("First user should have an email of type string ", async function () {
+      const userList = await userManagerContract.getAllUsers();      
+      expect(userList[0].email).to.be.a("string");
+    });
+    it("First user should an age of type number ", async function () {
+      const userList = await userManagerContract.getAllUsers();      
+      expect(userList[0].age.toNumber()).to.be.a("number");
+    });
+    it("First user should have a ipfs hash of type string ", async function () {
+      const userList = await userManagerContract.getAllUsers();      
+      expect(userList[0].ipfsHash).to.be.a("string");
+    });
+    it("First user should have a personnal link of type string ", async function () {
+      const userList = await userManagerContract.getAllUsers();      
+      expect(userList[0].personalLink).to.be.a("string");
+    });
+    it("First user should have an array of 1 tag", async function () {
+      const userList = await userManagerContract.getAllUsers();
+      expect(+userList[0].tags.length).to.equal(1);
+    });
   });
+
+
 });
