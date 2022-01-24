@@ -26,13 +26,17 @@ describe("UserManager contract test -------------", function () {
       const userList = await userManagerContract.getAllUsers();
       expect(+userList[0].tags.length).to.equal(1);
     });
-    it("First user should name of type string ", async function () {
+    it("First user should have a name of type string ", async function () {
       const userList = await userManagerContract.getAllUsers();      
       expect(userList[0].name).to.be.a("string");
+    });
+    it("First user should have a personnal link of type string ", async function () {
+      const userList = await userManagerContract.getAllUsers();      
+      expect(userList[0].personalLink).to.be.a("string");
     });
     it("First user should telephone number of type number ", async function () {
       const userList = await userManagerContract.getAllUsers();      
       expect(userList[0].telephoneNumber.toNumber()).to.be.a("number");
     });
-  })
+  });
 });
