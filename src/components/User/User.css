@@ -28,11 +28,27 @@
   flex-direction: column;
   justify-content:space-around;
 }
+.user-link-container {
+  display:flex;
+  flex-direction: row;
+}
 
-.user-container-4 a {
+.user-link {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-link > p {
   color: inherit;
   font-size: inherit;
   text-decoration: none;
+  transition: all .3s ease;
+  margin-left: 10px;
+}
+
+.user-link > p:hover {
+  transform: translateY(-5px);
+  color:white;
 }
 
 .user-img {
