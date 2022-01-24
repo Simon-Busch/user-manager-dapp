@@ -23,7 +23,8 @@ const dummyData: UserModel[] = [{
 const App: React.FC = () => {
   const [ currentAccount, setCurrentAccount ] = useState<string | null>(null);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
-  const [userManagerContract, setUserManagerContract] = useState<any>(null);
+  const [ userManagerContract, setUserManagerContract ] = useState<any>(null);
+  const [createdUser, setCreatedUser ] = useState<UserModel | null>(null);
   const USER_MANAGER_CONTRACT_ADDRESS:string = "0x79f11f932868613D43216497eF103FD41F55c5f4";
 
   const checkIfWalletIsConnected = async () => {
@@ -105,10 +106,9 @@ const App: React.FC = () => {
 		}
 	}, []);
 
-  const addUserHandler = () => {
-    console.log('add user handler')
-  }
-
+  const addUserHandler = (createdUser: UserModel) => {
+    setCreatedUser(createdUser);
+  };
   
   return (
     <div className="user-manager__main-container">

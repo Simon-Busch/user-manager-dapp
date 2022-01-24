@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import ipfs from '../../../utils/ipfs';
-import Input from './Input';
 import './Input.css'
 
 const Capture = ({onCapture}) => {
@@ -42,7 +41,6 @@ const Capture = ({onCapture}) => {
         onChange={(e) => captureFile(e)}
       />
       <label for="file">Upload</label>
-      {/* <Input label={"Upload your avatar"} type={"file"} onChangeHandler={(e) => captureFile(e)} /> */}
      </div>
   );
 };
