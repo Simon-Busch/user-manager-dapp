@@ -95,4 +95,31 @@ describe("UserManager contract test -------------", function () {
       expect(userList.length).to.equal(2);
     });
   });
+
+  describe("Update a user", function() {
+    it("Should be able to update a user", async function () {
+      await userManagerContract.updateUser(
+        0,
+        "jean",
+        "jean",
+        1212,
+        "jean@jean.jean",
+        69,
+        "QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD",
+        "https://github.com/Simon-Busch",
+        ["CEO"]
+      );
+      let user = await userManagerContract.getUser(0);
+      expect(user.name).to.equal("jean");
+      expect(user.age.toNumber()).to.equal(69);
+    });
+  });
+
+  describe("Delete a user", function() {
+    it("Should be able to delete a user", async function () {
+      await userManagerContract.deleteUser(0);
+      let user = await userManagerContract.getUser(0);
+      expect(user.age).to.equal(0);
+    });
+  });
 });
