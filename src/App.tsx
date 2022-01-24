@@ -4,13 +4,13 @@ import {ethers} from 'ethers';
 import UserList from './components/UserList/UserList';
 import Greetings from './components/Greetings/Greetings';
 import Button from './components/UI/Button/Button';
+import UserCreation from './components/UserCreation/UserCreation'
 import { UserModel } from './model/User.model';
 import ipfs from './utils/ipfs';
 import UserManagerContractABI from "./artifacts/contracts/UserManager.sol/UserManager.json";
 declare let window: any;
 
 const dummyData: UserModel[] = [{
-  id: 1,
   name: "Simon",
   lastName: "Busch",
   telephoneNumber: 123456789,
@@ -122,6 +122,7 @@ const App: React.FC = () => {
               text={"Connect your wallet 🦊"}
             />
           }
+          <UserCreation />
           <UserList 
             usersList={dummyData}
           />
