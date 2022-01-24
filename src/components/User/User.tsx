@@ -1,5 +1,6 @@
 import React from 'react';
 import { UserModel } from '../../model/User.model';
+import {User as UserIcon, AtSign, Phone, Link2} from 'react-feather'
 import './User.css';
 
 const User: React.FC<UserModel> = (props) => {
@@ -10,18 +11,18 @@ const User: React.FC<UserModel> = (props) => {
       </div>
       <div className="user-container-2">
         <div>
-          <h3>{props.name}, {props.age}</h3>
+          <h3><UserIcon color={"white"} size="15" strokeWidth="1.2" />{props.name}, {props.age}</h3>
         </div>
         <div>
-          <p>{props.lastName}</p>
+          <p style={{marginLeft:'18px'}}>{props.lastName}</p>
         </div>
       </div>
       <div className="user-container-3">
-        <p>{props.email}</p>
-        <p>{props.telephoneNumber}</p>
+        <p><AtSign color={"white"} size="15" strokeWidth="1.2" /> {props.email}</p>
+        <p><Phone color={"white"} size="15" strokeWidth="1.2" /> {props.telephoneNumber}</p>
       </div>
       <div className="user-container-4">
-        <a href={props.personalLink} target='_blank' rel='noreferrer'>{props.personalLink}</a>
+        <a href={props.personalLink} target='_blank' rel='noreferrer' className="paragraph-grey user-link"><Link2 color={"white"} size="15" strokeWidth="1.2" /><p>{props.personalLink}</p></a>
         <div>
         {props.tags.map((tag,index) => {
           return <p key={index} className="tags">{tag}</p>
