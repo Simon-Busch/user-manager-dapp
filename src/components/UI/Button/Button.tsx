@@ -1,10 +1,16 @@
 import React from 'react';
 import './Button.css';
 
-const Button = () => {
+interface ButtonProps {
+  onAction: () => void;
+  text: string;
+  // size: string;
+}
+
+const Button: React.FC<ButtonProps> = ({onAction, text}) => {
   return (
-    <div>
-      
+    <div onClick={onAction} className="button">
+      <p className="paragraph-grey button-text">{text}</p>
     </div>
   );
 };
