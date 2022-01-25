@@ -17,14 +17,15 @@ const dummyData: UserModel[] = [{
   age: 32,
   ipfsHash: "QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD",
   personalLink: "https://github.com/Simon-Busch",
-  tags:['frontend engineer', 'blockchain dev', 'solidity lover'],
-}]
+  tags:'frontend engineer',
+}];
 
 const App: React.FC = () => {
   const [ currentAccount, setCurrentAccount ] = useState<string | null>(null);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ userManagerContract, setUserManagerContract ] = useState<any>(null);
-  const [createdUser, setCreatedUser ] = useState<UserModel | null>(null);
+  const [ createdUser, setCreatedUser ] = useState<UserModel | null>(null);
+  const [ userList, setUserList ] = useState<UserModel[] | null>(null);
   const USER_MANAGER_CONTRACT_ADDRESS:string = "0x79f11f932868613D43216497eF103FD41F55c5f4";
 
   const checkIfWalletIsConnected = async () => {
@@ -88,6 +89,28 @@ const App: React.FC = () => {
     setIsLoading(false);
   }, []);
 
+  const fetchAllUsers = async (userManagerContractEther: any) => {
+    setIsLoading(true);
+    const allUsers = await userManagerContractEther.getAllUsers();
+    let userArray: UserModel[] = [];
+    allUsers.forEach((user: any) => {
+      let fetchedUser: UserModel= {
+        id: user.id,
+        name: user.name,
+        lastName: user.lastName,
+        telephoneNumber: user.telephoneNumber.toNumber(),
+        email: user.email,
+        age: user.age.toNumber(),
+        ipfsHash: user.ipfsHash,
+        personalLink: user.personalLink,
+        tags:user.tags,
+      }
+      userArray.push(fetchedUser);
+    })
+    setUserList(userArray);
+    setIsLoading(false);
+  };
+
   //get the contract instance
   useEffect(() => {
     let ethereum: any;
@@ -99,6 +122,7 @@ const App: React.FC = () => {
 			const userManagerContractEther = new ethers.Contract(USER_MANAGER_CONTRACT_ADDRESS, UserManagerContractABI.abi, signer);
 			setUserManagerContract(userManagerContractEther);
       console.log(userManagerContract);
+      fetchAllUsers(userManagerContractEther);
       setIsLoading(false);
 		} else {
 			console.log('Ethereum object not found');
@@ -106,8 +130,21 @@ const App: React.FC = () => {
 		}
 	}, []);
 
-  const addUserHandler = (createdUser: UserModel) => {
-    setCreatedUser(createdUser);
+
+  //get all users
+  // useEffect(() => {
+  //   console.log('rendering')
+    
+  //   fetchAllUsers();
+  // }, [userManagerContract])
+
+  const addUserHandler = async (toCreateUser: UserModel) => {
+    // setCreatedUser(toCreateUser);
+    const {name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags } = toCreateUser;
+    console.log(name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags)
+    setIsLoading(true);
+    await userManagerContract.createUser(name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags);
+    setIsLoading(false);
   };
   
   return (
@@ -127,7 +164,7 @@ const App: React.FC = () => {
           }
           <UserCreation onAddUser={addUserHandler} />
           <UserList 
-            usersList={dummyData}
+            usersList={userList || dummyData}
           />
         </>
           :

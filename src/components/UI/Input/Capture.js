@@ -40,7 +40,7 @@ const Capture = ({onCapture}) => {
         id="file"
         onChange={(e) => captureFile(e)}
       />
-      <label for="file">Upload</label>
+      <label htmlFor="file">Upload</label>
      </div>
   );
 };

@@ -13,7 +13,7 @@ contract UserManager {
         uint age;
         string ipfsHash;
         string personalLink;
-        string[] tags;
+        string tags;
     }
 
 
@@ -46,14 +46,14 @@ contract UserManager {
             age: _age,
             ipfsHash: _ipfsHash,
             personalLink: _personalLink,
-            tags: new string[](0)
+            tags: _tag
         });
 
         users.push(newUser);
-        users[users.length-1].tags.push(_tag);
+        //users[users.length-1].tags.push(_tag);
     }
 
-    function updateUser(uint id, string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash,string memory _personalLink, string[] memory _tag) public {
+    function updateUser(uint id, string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash,string memory _personalLink, string memory _tag) public {
         users[id].name = _name;
         users[id].lastName = _lastName;
         users[id].telephoneNumber = _telephoneNumber;
