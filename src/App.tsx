@@ -1,26 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
 import {ethers} from 'ethers';
+import toast, { Toaster } from 'react-hot-toast';
 import UserList from './components/UserList/UserList';
 import Greetings from './components/Greetings/Greetings';
 import Button from './components/UI/Button/Button';
 import UserCreation from './components/UserCreation/UserCreation'
 import { UserModel } from './model/User.model';
 import UserManagerContractABI from "./artifacts/contracts/UserManager.sol/UserManager.json";
-import toast, { Toaster } from 'react-hot-toast';
+import { onLoadData } from './utils/dummyData';
+import { USER_MANAGER_CONTRACT_ADDRESS } from './utils/contractAddress';
+import './App.css';
 declare let window: any;
-
-const dummyData: UserModel[] = [{
-  id:0,
-  name: "Simon",
-  lastName: "Busch",
-  telephoneNumber: 123456789,
-  email: "simon@simon.com",
-  age: 32,
-  ipfsHash: "QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD",
-  personalLink: "https://github.com/Simon-Busch",
-  tags:'frontend engineer',
-}];
 
 const App: React.FC = () => {
   const [ currentAccount, setCurrentAccount ] = useState<string | null>(null);
@@ -28,7 +18,6 @@ const App: React.FC = () => {
   const [ userManagerContract, setUserManagerContract ] = useState<any>(null);
   const [ userList, setUserList ] = useState<UserModel[] | null>(null);
   const [ isCreating, setIsCreating ] = useState<boolean>(false);
-  const USER_MANAGER_CONTRACT_ADDRESS:string = "0xCC18deC0902B254f98FdDb97020a398939215BfE";
 
   const creatingHandler = () => {
     setIsCreating(!isCreating);
@@ -213,7 +202,7 @@ const App: React.FC = () => {
 
           }
           <UserList 
-            usersList={userList || dummyData}
+            usersList={userList || onLoadData}
             deleteUser={onDeleteHandler}
             updateUserHandler={onUpdateUserHandler}
           />
