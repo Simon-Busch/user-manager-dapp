@@ -27,7 +27,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm i
-    - run: npm test
-    
-    - run: npx hardhat test
+    - name: Install all dependencies
+      run: npm i 
+    - name: Launch the test on React app
+      run: npm test
+    - name: Launch hardhat tests on smart contract
+      run: npx hardhat test
