@@ -17,8 +17,8 @@ jobs:
         node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     env:
-    URL_INFURA: ${{ secrets.URL_INFURA }}
-    ACCOUNT_PRIVATE: ${{ secrets.ACCOUNT_PRIVATE }}
+      URL_INFURA: ${{ secrets.URL_INFURA }}
+      ACCOUNT_PRIVATE: ${{ secrets.ACCOUNT_PRIVATE }}
 
     steps:
     - uses: actions/checkout@v2
