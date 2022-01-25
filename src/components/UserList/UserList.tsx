@@ -5,6 +5,7 @@ import './UserList.css';
 
 interface UserListProps {
   usersList: UserModel[];
+  deleteUser: (userId: any) => void;
 }
 
 const UserList: React.FC<UserListProps> = (props) => {
@@ -13,7 +14,8 @@ const UserList: React.FC<UserListProps> = (props) => {
       {props.usersList.map((user) => {
         return (
           <User
-            key={Math.random()*155555}
+            key={user.id ? user.id : Math.random()*155555}
+            id={user.id}
             name={user.name}
             lastName={user.lastName}
             telephoneNumber={user.telephoneNumber}
@@ -22,6 +24,7 @@ const UserList: React.FC<UserListProps> = (props) => {
             ipfsHash={user.ipfsHash}
             personalLink={user.personalLink}
             tags={user.tags}
+            deleteUser={props.deleteUser}
           />
         )
       })}

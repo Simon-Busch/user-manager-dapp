@@ -1,17 +1,17 @@
 import React from 'react';
 import { UserModel } from '../../model/User.model';
-import {User as UserIcon, AtSign, Phone, Link2} from 'react-feather'
+import {User as UserIcon, AtSign, Phone, Link2, X, Edit} from 'react-feather'
 import './User.css';
+interface UserProps {
+  deleteUser: (id: any)=> void;
+}
 
-const User: React.FC<UserModel> = (props) => {
-  // let tagsArray: string[] = []
-  // if (props.tags && props.tags.includes(' ')) {
-  //   tagsArray = props.tags.split(' ');
-  // } else {
-  //   tagsArray.push(props.tags);
-  // }
-  console.log(props.name,props.tags)
+type Props = UserModel & UserProps;
 
+const User: React.FC<Props> = (props) => {
+  const deleteHandler = () => {
+    props.deleteUser(props.id);
+  }
   return (
     <div className="user-container">
       <div className="user-container-1">
@@ -32,11 +32,12 @@ const User: React.FC<UserModel> = (props) => {
       <div className="user-container-4">
         <a href={props.personalLink} target='_blank' rel='noreferrer' className="paragraph-grey user-link"><Link2 color={"white"} size="15" strokeWidth="1.2" /><p>{props.personalLink}</p></a>
         <div>
-        <p className="tags">{props.tags}</p>
-        {/* {tagsArray.map((tag,index) => {
-          return <p key={index} className="tags">{tag}</p>
-        })} */}
+          <p className="tags">{props.tags}</p>
         </div>
+      </div>
+      <div className="user-container-4">
+        <Edit color={"white"} size="15" strokeWidth="1.2" />
+        <X color={"red"} size="15" strokeWidth="1.2" onClick={deleteHandler} />
       </div>
     </div>
   );
