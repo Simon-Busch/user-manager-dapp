@@ -62,7 +62,6 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
       ipfsHash: imgHash,
       tags: tagInputRef.current!.value
     };
-    console.log(updatedUser);
     props.onUpdateUserHandler!(updatedUser);
   }
 
