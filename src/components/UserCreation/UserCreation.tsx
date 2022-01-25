@@ -36,7 +36,6 @@ const UserCreation: React.FC<userCreationProps> = ({onAddUser}) => {
 
   const captureHandler = (text: string) => {
     setIpfsHash(text);
-    console.log(text)
   }
 
   return (
