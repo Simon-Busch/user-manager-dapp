@@ -1,6 +1,28 @@
 # User Manager Dapp
 
-This application is user manager Dapp made with HardHat, Solidity, React and Typescript
+## Use case
+On this application, the user should be able to :
+- Create contact
+- View contact details 
+- Update contact details
+- Delete contact
+
+For reference, the user model is the following:
+- Name
+- Last Name
+- Telephone number
+- Email
+- Age
+- Picture/Avatar
+- Link to personal website
+- Tags
+
+## Stack used
+- React
+- Typescript
+- HTML5/CSS3
+- Solidity
+- Hardhat
 
 ## Installation
 
@@ -52,9 +74,6 @@ Make sure all tests are running smoothly with the following command:
 ```bash
 npm run test
 ```
-
-## Architecture
-
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
