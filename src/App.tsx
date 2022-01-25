@@ -157,6 +157,7 @@ const App: React.FC = () => {
     if (toUpdateUser === null) {
       return;
     }
+    
     const {id, name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags } = toUpdateUser;
     setIsLoading(true);
     let tx = await userManagerContract.updateUser(id, name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags);
