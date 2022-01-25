@@ -145,6 +145,22 @@ const App: React.FC = () => {
     fetchAllUsers(userManagerContract);
   };
 
+  const onUpdateUserHandler = async (toUpdateUser: UserModel) => {
+    console.log(toUpdateUser)
+    if (toUpdateUser === null) {
+      return;
+    }
+    console.log("triggered updated user")
+    const {id, name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags } = toUpdateUser;
+    setIsLoading(true);
+    let tx = await userManagerContract.updateUser(id, name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags);
+    await tx.wait();
+    toast.success('User Updated!');
+    setIsLoading(false);
+    // change later for events
+    fetchAllUsers(userManagerContract);
+  };
+
   const onDeleteHandler = async (userId: any) => {
     setIsLoading(true);
     let tx = await userManagerContract.deleteUser(userId.toNumber()); //userId type === BigNumber
@@ -169,10 +185,15 @@ const App: React.FC = () => {
               text={"Connect your wallet 🦊"}
             />
           }
-          <UserCreation onAddUser={addUserHandler} />
+          <UserCreation 
+            isEditing={false} 
+            onAddUser={addUserHandler} 
+            title={"Create User"} 
+          />
           <UserList 
             usersList={userList || dummyData}
             deleteUser={onDeleteHandler}
+            updateUserHandler={onUpdateUserHandler}
           />
         </>)
           :

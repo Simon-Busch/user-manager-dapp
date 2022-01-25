@@ -6,9 +6,15 @@ import './UserList.css';
 interface UserListProps {
   usersList: UserModel[];
   deleteUser: (userId: any) => void;
+  updateUserHandler: (updatedUser: any) => void;
 }
 
 const UserList: React.FC<UserListProps> = (props) => {
+  // const updateHandler = (updatedUser: UserModel) => {
+  //   if (props.onUpdateUserHandler) {
+  //     props.onUpdateUserHandler(updatedUser);
+  //   }
+  // }
   return (
     <ul>
       {props.usersList.map((user) => {
@@ -25,6 +31,7 @@ const UserList: React.FC<UserListProps> = (props) => {
             personalLink={user.personalLink}
             tags={user.tags}
             deleteUser={props.deleteUser}
+            updateUser={props.updateUserHandler}
           />
         )
       })}
