@@ -7,6 +7,7 @@ import Button from './components/UI/Button/Button';
 import UserCreation from './components/UserCreation/UserCreation'
 import { UserModel } from './model/User.model';
 import UserManagerContractABI from "./artifacts/contracts/UserManager.sol/UserManager.json";
+import toast, { Toaster } from 'react-hot-toast';
 declare let window: any;
 
 const dummyData: UserModel[] = [{
@@ -24,9 +25,8 @@ const App: React.FC = () => {
   const [ currentAccount, setCurrentAccount ] = useState<string | null>(null);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ userManagerContract, setUserManagerContract ] = useState<any>(null);
-  const [ createdUser, setCreatedUser ] = useState<UserModel | null>(null);
   const [ userList, setUserList ] = useState<UserModel[] | null>(null);
-  const USER_MANAGER_CONTRACT_ADDRESS:string = "0x79f11f932868613D43216497eF103FD41F55c5f4";
+  const USER_MANAGER_CONTRACT_ADDRESS:string = "0x6e8a8AA24479173B792769a438B47225f4F4788A";
 
   const checkIfWalletIsConnected = async () => {
 		try {
@@ -38,11 +38,10 @@ const App: React.FC = () => {
 				return;
 			} else {
         let chainId = await ethereum.request({ method: 'eth_chainId' });
-				console.log('We have the ethereum object', ethereum, "Connected to chain " + chainId);
 
         const rinkebyChainId = "0x4"; 
         if (chainId !== rinkebyChainId) {
-          alert("You are not connected to the Rinkeby Test Network!");
+          alert("Please switch network to Rinkeby test network 🦊");
           setIsLoading(false);
           return;
         }
@@ -53,7 +52,7 @@ const App: React.FC = () => {
 					setCurrentAccount(account);
           setIsLoading(false);
 				} else {
-					console.log('No authorized account found');
+					alert('No authorized account found');
           setIsLoading(false);
 				}
 			}
@@ -89,11 +88,16 @@ const App: React.FC = () => {
     setIsLoading(false);
   }, []);
 
+  //fetch all users
   const fetchAllUsers = async (userManagerContractEther: any) => {
     setIsLoading(true);
     const allUsers = await userManagerContractEther.getAllUsers();
     let userArray: UserModel[] = [];
     allUsers.forEach((user: any) => {
+      if(user.name === "" || user.age.toNumber() === 0) {
+        console.log(user)
+        return;
+      }
       let fetchedUser: UserModel= {
         id: user.id,
         name: user.name,
@@ -121,7 +125,6 @@ const App: React.FC = () => {
 			const signer = provider.getSigner();
 			const userManagerContractEther = new ethers.Contract(USER_MANAGER_CONTRACT_ADDRESS, UserManagerContractABI.abi, signer);
 			setUserManagerContract(userManagerContractEther);
-      console.log(userManagerContract);
       fetchAllUsers(userManagerContractEther);
       setIsLoading(false);
 		} else {
@@ -130,29 +133,25 @@ const App: React.FC = () => {
 		}
 	}, []);
 
-
-  //get all users
-  // useEffect(() => {
-  //   console.log('rendering')
-    
-  //   fetchAllUsers();
-  // }, [userManagerContract])
-
+  //create a user
   const addUserHandler = async (toCreateUser: UserModel) => {
-    // setCreatedUser(toCreateUser);
     const {name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags } = toCreateUser;
-    console.log(name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags)
     setIsLoading(true);
-    await userManagerContract.createUser(name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags);
+    let tx = await userManagerContract.createUser(name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags);
+    await tx.wait();
+    toast.success('User created!');
     setIsLoading(false);
+    // change later for events
+    fetchAllUsers(userManagerContract);
   };
   
   return (
     <div className="user-manager__main-container">
+      <Toaster />
       <h1 className="main-title">User Manager</h1>
       {
         isLoading === false ? 
-        <>
+        (<>
           {
             currentAccount !== null ? 
             <Greetings account={currentAccount}/>
@@ -166,7 +165,7 @@ const App: React.FC = () => {
           <UserList 
             usersList={userList || dummyData}
           />
-        </>
+        </>)
           :
         <p className="paragraph-grey"> Loading ...</p>
       }
