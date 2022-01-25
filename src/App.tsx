@@ -27,7 +27,12 @@ const App: React.FC = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ userManagerContract, setUserManagerContract ] = useState<any>(null);
   const [ userList, setUserList ] = useState<UserModel[] | null>(null);
+  const [ isCreating, setIsCreating ] = useState<boolean>(false);
   const USER_MANAGER_CONTRACT_ADDRESS:string = "0xCC18deC0902B254f98FdDb97020a398939215BfE";
+
+  const creatingHandler = () => {
+    setIsCreating(!isCreating);
+  }
 
   const checkIfWalletIsConnected = async () => {
 		try {
@@ -101,8 +106,6 @@ const App: React.FC = () => {
         return;
       }
 
-      console.log(user.id.toNumber());
-
       let fetchedUser: UserModel= {
         id: user.id.toNumber(),
         name: user.name,
@@ -151,11 +154,9 @@ const App: React.FC = () => {
   };
 
   const onUpdateUserHandler = async (toUpdateUser: UserModel) => {
-    console.log(toUpdateUser)
     if (toUpdateUser === null) {
       return;
     }
-    console.log("triggered updated user")
     const {id, name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags } = toUpdateUser;
     setIsLoading(true);
     let tx = await userManagerContract.updateUser(id, name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags);
@@ -190,11 +191,26 @@ const App: React.FC = () => {
               text={"Connect your wallet 🦊"}
             />
           }
-          <UserCreation 
-            isEditing={false} 
-            onAddUser={addUserHandler} 
-            title={"Create User"} 
-          />
+          {
+            isCreating === true ?
+              <>
+                <Button 
+                  onAction={creatingHandler}
+                  text={"Stop creating ❌"}
+                />
+                <UserCreation 
+                  isEditing={false} 
+                  onAddUser={addUserHandler} 
+                  title={"Create User"} 
+                />
+              </>
+              :
+            <Button 
+              onAction={creatingHandler}
+              text={"Create a user ✅"}
+            />
+
+          }
           <UserList 
             usersList={userList || dummyData}
             deleteUser={onDeleteHandler}
