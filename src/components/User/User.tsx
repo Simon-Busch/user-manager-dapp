@@ -13,7 +13,7 @@ type Props = UserModel & UserProps;
 
 const User: React.FC<Props> = (props) => {
   const [isEditing, setIsEditing] =useState<boolean>(false);
-  
+
   const deleteHandler = () => {
     props.deleteUser(props.id);
   }

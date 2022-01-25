@@ -50,6 +50,8 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
     if (props.defaultIpfsHash) {
       imgHash = props.defaultIpfsHash !== ipfsHash   ? ipfsHash : props.defaultIpfsHash ;
     }
+    console.log("default ipfs hash",props.defaultIpfsHash)
+    console.log("new upload", ipfsHash)
 
     const updatedUser: UserModel = {
       id: props.defaultId,
