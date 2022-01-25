@@ -10,11 +10,6 @@ interface UserListProps {
 }
 
 const UserList: React.FC<UserListProps> = (props) => {
-  // const updateHandler = (updatedUser: UserModel) => {
-  //   if (props.onUpdateUserHandler) {
-  //     props.onUpdateUserHandler(updatedUser);
-  //   }
-  // }
   return (
     <ul>
       {props.usersList.map((user) => {

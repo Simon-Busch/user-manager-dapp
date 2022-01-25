@@ -74,6 +74,7 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
   return (
     <div className="user-creation-container">
       <h2>{props.title}</h2>
+      
       <div>
         <Input label={'Enter your user name'} reference={nameInputRef} type={'text'} value={props.defaultName} />
         <Input label={'Enter your user last name'} reference={lastNameInputRef} type={'text'} value={props.defaultLastName} />
