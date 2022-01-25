@@ -31,4 +31,3 @@ jobs:
     - run: npm test
     
     - run: npx hardhat test
-    - run: npm run build --if-present
