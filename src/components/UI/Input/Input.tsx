@@ -13,7 +13,7 @@ const Input: React.FC<InputProps> = (props) => {
   return (
     <div className="input-container">
       <label>{props.label} </label>
-      <input type={props.type} ref={props.reference} value={props.value ? props.value : ''} required />
+      <input type={props.type} ref={props.reference} defaultValue={props.value ? props.value : ''} required />
     </div>
   );
 };
