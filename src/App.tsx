@@ -27,7 +27,7 @@ const App: React.FC = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ userManagerContract, setUserManagerContract ] = useState<any>(null);
   const [ userList, setUserList ] = useState<UserModel[] | null>(null);
-  const USER_MANAGER_CONTRACT_ADDRESS:string = "0x6e8a8AA24479173B792769a438B47225f4F4788A";
+  const USER_MANAGER_CONTRACT_ADDRESS:string = "0xCC18deC0902B254f98FdDb97020a398939215BfE";
 
   const checkIfWalletIsConnected = async () => {
 		try {
@@ -95,11 +95,16 @@ const App: React.FC = () => {
     const allUsers = await userManagerContractEther.getAllUsers();
     let userArray: UserModel[] = [];
     allUsers.forEach((user: any) => {
+      //filter the deleted instance
+      // still remain on  the blockchain with "" for string && 0 for numbers
       if(user.name === "" || user.age.toNumber() === 0 || user.lastName === "") {
         return;
       }
+
+      console.log(user.id.toNumber());
+
       let fetchedUser: UserModel= {
-        id: user.id,
+        id: user.id.toNumber(),
         name: user.name,
         lastName: user.lastName,
         telephoneNumber: user.telephoneNumber.toNumber(),
@@ -163,7 +168,7 @@ const App: React.FC = () => {
 
   const onDeleteHandler = async (userId: any) => {
     setIsLoading(true);
-    let tx = await userManagerContract.deleteUser(userId.toNumber()); //userId type === BigNumber
+    let tx = await userManagerContract.deleteUser(userId); 
     await tx.wait();
     toast.success('User deleted!');
     setIsLoading(false);
