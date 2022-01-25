@@ -66,7 +66,6 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
   }
 
   const captureHandler = (text: string) => {
-    console.log(text)
     setIpfsHash(text);
   }
 
@@ -76,9 +75,9 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
       <div>
         <Input label={'Enter your user name'} reference={nameInputRef} type={'text'} value={props.defaultName} />
         <Input label={'Enter your user last name'} reference={lastNameInputRef} type={'text'} value={props.defaultLastName} />
-        <Input label={'Enter your user telephone number'} reference={telephoneNumberInputRef} type={'text'} value={props.defaultTelephoneNumber} />
+        <Input label={'Enter your user telephone number'} reference={telephoneNumberInputRef} type={'number'} value={props.defaultTelephoneNumber} />
         <Input label={'Enter your user email'} reference={emailInputRef} type={'text'} value={props.defaultEmail} />
-        <Input label={'Enter your user age'} reference={ageInputRef} type={'text'} value={props.defaultAge} />
+        <Input label={'Enter your user age'} reference={ageInputRef} type={'number'} value={props.defaultAge} />
         <Input label={'Enter your user personnal link'} reference={personnalLinkInputRef} type={'text'} value={props.defaultPersonalLink} />
         <Input label={'Enter your user tag'} reference={tagInputRef} type={'text'} value={props.defaultTags} />
         <Capture onCapture={captureHandler} />
