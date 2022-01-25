@@ -11,6 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 declare let window: any;
 
 const dummyData: UserModel[] = [{
+  id:0,
   name: "Simon",
   lastName: "Busch",
   telephoneNumber: 123456789,
@@ -94,8 +95,7 @@ const App: React.FC = () => {
     const allUsers = await userManagerContractEther.getAllUsers();
     let userArray: UserModel[] = [];
     allUsers.forEach((user: any) => {
-      if(user.name === "" || user.age.toNumber() === 0) {
-        console.log(user)
+      if(user.name === "" || user.age.toNumber() === 0 || user.lastName === "") {
         return;
       }
       let fetchedUser: UserModel= {
@@ -144,6 +144,14 @@ const App: React.FC = () => {
     // change later for events
     fetchAllUsers(userManagerContract);
   };
+
+  const onDeleteHandler = async (userId: any) => {
+    setIsLoading(true);
+    let tx = await userManagerContract.deleteUser(userId.toNumber()); //userId type === BigNumber
+    await tx.wait();
+    toast.success('User deleted!');
+    setIsLoading(false);
+  }
   
   return (
     <div className="user-manager__main-container">
@@ -164,6 +172,7 @@ const App: React.FC = () => {
           <UserCreation onAddUser={addUserHandler} />
           <UserList 
             usersList={userList || dummyData}
+            deleteUser={onDeleteHandler}
           />
         </>)
           :
