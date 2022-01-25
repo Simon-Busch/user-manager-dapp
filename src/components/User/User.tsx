@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { UserModel } from '../../model/User.model';
 import {User as UserIcon, AtSign, Phone, Link2, X, Edit} from 'react-feather'
 import UserCreation from '../UserCreation/UserCreation';
-
 import './User.css';
+
 interface UserProps {
   deleteUser: (id: any)=> void;
   updateUser: (updatedUser: UserModel) => void;

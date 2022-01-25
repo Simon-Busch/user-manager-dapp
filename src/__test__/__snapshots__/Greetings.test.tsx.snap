@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when rendered with an account prop should paste it into the greetings text 1`] = `
+<div
+  class="greetings-container"
+>
+  <p
+    class="paragraph-grey"
+  >
+    Hey ! Welcome back 
+    john
+     ✌🏼
+  </p>
+</div>
+`;
