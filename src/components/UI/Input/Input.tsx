@@ -6,13 +6,14 @@ interface InputProps {
   type: string;
   reference: any;
   onChangeHandler?: any;
+  value?: string | number;
 }
 
 const Input: React.FC<InputProps> = (props) => {
   return (
     <div className="input-container">
       <label>{props.label} </label>
-      <input type={props.type} ref={props.reference} required />
+      <input type={props.type} ref={props.reference} value={props.value ? props.value : ''} required />
     </div>
   );
 };
