@@ -21,9 +21,6 @@ const UserCreation: React.FC<userCreationProps> = ({onAddUser}) => {
 
 
   const formHandler = (event: React.FormEvent) => {
-    let tagsArray = [];
-    tagsArray.push(tagInputRef.current!.value);
-
     const createdUser: UserModel = {
       name: nameInputRef.current!.value,
       lastName: lastNameInputRef.current!.value,
@@ -32,13 +29,14 @@ const UserCreation: React.FC<userCreationProps> = ({onAddUser}) => {
       age: +ageInputRef.current!.value,
       personalLink: personnalLinkInputRef.current!.value,
       ipfsHash:ipfsHash,
-      tags: tagsArray
+      tags: tagInputRef.current!.value
     }
     onAddUser(createdUser);
   }
 
   const captureHandler = (text: string) => {
     setIpfsHash(text);
+    console.log(text)
   }
 
   return (

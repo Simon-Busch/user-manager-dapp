@@ -11,7 +11,7 @@ async function main() {
 
   await userManagerContract.deployed();
   console.log("userManager deployed to:", userManagerContract.address);
-
+  
 }
 
 main()

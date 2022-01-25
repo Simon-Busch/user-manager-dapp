@@ -1,4 +1,5 @@
 export interface UserModel {
+  id?: number;
   name: string;
   lastName: string;
   telephoneNumber: number;
@@ -6,5 +7,5 @@ export interface UserModel {
   age: number;
   ipfsHash: string;
   personalLink: string;
-  tags: string[];
+  tags: string;
 }
