@@ -25,7 +25,6 @@ contract UserManager {
     constructor() {
         userId = 0;
         createUser("Simon","Busch",44784544654,"simon.busch@live.fr",32,"QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD","https://github.com/Simon-Busch","solidity");
-        userId += 1;
     }
 
     function getAllUsers() external view returns (User[] memory) {
@@ -51,6 +50,7 @@ contract UserManager {
 
         users.push(newUser);
         //users[users.length-1].tags.push(_tag);
+        userId += 1;
     }
 
     function updateUser(uint id, string memory _name, string memory _lastName, uint _telephoneNumber, string memory  _email, uint  _age, string memory _ipfsHash,string memory _personalLink, string memory _tag) public {

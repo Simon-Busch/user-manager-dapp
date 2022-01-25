@@ -46,16 +46,20 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
   }
 
   const editHandler = (event: React.FormEvent) => {
-    let imgHash: string | undefined = ipfsHash !== 'QmWCVgLqsoa5MH8q2USpY2i3UCbdiyNDjqh9TBCs8Fh4KK' ? props.defaultIpfsHash : ipfsHash ;
+    let imgHash: string = '';
+    if (props.defaultIpfsHash) {
+      imgHash = props.defaultIpfsHash !== ipfsHash   ? ipfsHash : props.defaultIpfsHash ;
+    }
+
     const updatedUser: UserModel = {
-      id: props.defaultId.toNumber(),
+      id: props.defaultId,
       name: nameInputRef.current!.value,
       lastName: lastNameInputRef.current!.value,
       telephoneNumber: +telephoneNumberInputRef.current!.value,
       email: emailInputRef.current!.value,
       age: +ageInputRef.current!.value,
       personalLink: personnalLinkInputRef.current!.value,
-      ipfsHash: ipfsHash,
+      ipfsHash: imgHash,
       tags: tagInputRef.current!.value
     };
     console.log(updatedUser);
