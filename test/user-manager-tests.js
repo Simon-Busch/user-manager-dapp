@@ -50,9 +50,9 @@ describe("UserManager contract test -------------", function () {
       const userList = await userManagerContract.getAllUsers();      
       expect(userList[0].personalLink).to.be.a("string");
     });
-    it("First user should have an array of 1 tag", async function () {
+    it("First user should have a tag", async function () {
       const userList = await userManagerContract.getAllUsers();
-      expect(+userList[0].tags.length).to.equal(1);
+      expect(userList[0].tags).to.equal("solidity");
     });
   });
 
@@ -77,7 +77,7 @@ describe("UserManager contract test -------------", function () {
       expect(user.personalLink).to.equal("https://github.com/");
       expect(user.age).to.equal(22);
       expect(user.ipfsHash).to.equal("QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD");
-      expect(user.tags[0]).to.equal("worker");
+      expect(user.tags).to.equal("worker");
       expect(userList.length).to.equal(2);
     });
     it("User list should have a length of 2 after user creation", async function () {
@@ -107,7 +107,7 @@ describe("UserManager contract test -------------", function () {
         69,
         "QmdocV9tSr7qvRe3qmC3J7AwWw4D5pj8gnMPnWrneZjJfD",
         "https://github.com/Simon-Busch",
-        ["CEO"]
+        "CEO"
       );
       let user = await userManagerContract.getUser(0);
       expect(user.name).to.equal("jean");
