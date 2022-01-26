@@ -70,14 +70,14 @@ const User: React.FC<Props> = (props) => {
           <div className="user-container-4">
             <Edit
               color={"white"}
-              size="15"
-              strokeWidth="1.2"
+              size="20"
+              strokeWidth="1.4"
               onClick={editHandler}
             />
             <X
               color={"red"}
-              size="15"
-              strokeWidth="1.2"
+              size="20"
+              strokeWidth="1.4"
               onClick={deleteHandler}
             />
           </div>

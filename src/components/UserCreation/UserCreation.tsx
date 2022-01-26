@@ -34,17 +34,30 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
   const tagInputRef = useRef<HTMLInputElement>(null);
 
   const formHandler = (event: React.FormEvent) => {
-    const createdUser: UserModel = {
-      name: nameInputRef.current!.value,
-      lastName: lastNameInputRef.current!.value,
-      telephoneNumber: +telephoneNumberInputRef.current!.value,
-      email: emailInputRef.current!.value,
-      age: +ageInputRef.current!.value,
-      personalLink: personnalLinkInputRef.current!.value,
-      ipfsHash: ipfsHash,
-      tags: tagInputRef.current!.value,
-    };
-    props.onAddUser!(createdUser);
+    if (
+      nameInputRef.current!.value &&
+      lastNameInputRef.current!.value &&
+      emailInputRef.current!.value &&
+      personnalLinkInputRef.current!.value &&
+      ipfsHash &&
+      tagInputRef.current!.value &&
+      +ageInputRef.current!.value &&
+      +telephoneNumberInputRef.current!.value 
+    ) {
+      const createdUser: UserModel = {
+        name: nameInputRef.current!.value,
+        lastName: lastNameInputRef.current!.value,
+        telephoneNumber: +telephoneNumberInputRef.current!.value,
+        email: emailInputRef.current!.value,
+        age: +ageInputRef.current!.value,
+        personalLink: personnalLinkInputRef.current!.value,
+        ipfsHash: ipfsHash,
+        tags: tagInputRef.current!.value,
+      };
+      props.onAddUser!(createdUser);
+    } else {
+      alert("Please fill all fields");
+    }
   };
 
   const editHandler = (event: React.FormEvent) => {
