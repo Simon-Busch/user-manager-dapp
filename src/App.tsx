@@ -19,10 +19,12 @@ const App: React.FC = () => {
   const [ userList, setUserList ] = useState<UserModel[] | null>(null);
   const [ isCreating, setIsCreating ] = useState<boolean>(false);
 
+  //handle creating mode
   const creatingHandler = () => {
     setIsCreating(!isCreating);
   }
 
+  //check Wallet connection
   const checkIfWalletIsConnected = async () => {
 		try {
       let ethereum: any;
@@ -35,8 +37,9 @@ const App: React.FC = () => {
         let chainId = await ethereum.request({ method: 'eth_chainId' });
 
         const rinkebyChainId = "0x4"; 
+        // need to be connected on Rinkeby test network
         if (chainId !== rinkebyChainId) {
-          alert("Please switch network to Rinkeby test network 🦊");
+          toast.error("Please switch network to Rinkeby test network 🦊")
           setIsLoading(false);
           return;
         }
@@ -47,7 +50,7 @@ const App: React.FC = () => {
 					setCurrentAccount(account);
           setIsLoading(false);
 				} else {
-					alert('No authorized account found');
+          toast.error("Please connect with MetaMask to get started 🦊")
           setIsLoading(false);
 				}
 			}
@@ -63,13 +66,14 @@ const App: React.FC = () => {
 			ethereum = window.ethereum;
 
 			if (!ethereum) {
-				alert('Get MetaMask!');
+        toast.error("Please use MetaMask")
 				return;
 			}
 
 			const accounts = await ethereum.request({method: 'eth_requestAccounts'});
 			console.log('Connected', accounts[0]);
 			setCurrentAccount(accounts[0]);
+      toast.success('You are connected 🚀')
       setIsLoading(false);
 		} catch (error) {
 			console.log(error);
@@ -89,7 +93,7 @@ const App: React.FC = () => {
     const allUsers = await userManagerContractEther.getAllUsers();
     let userArray: UserModel[] = [];
     allUsers.forEach((user: any) => {
-      //filter the deleted instance
+      // filter the deleted instance
       // still remain on  the blockchain with "" for string && 0 for numbers
       if(user.name === "" || user.age.toNumber() === 0 || user.lastName === "") {
         return;
@@ -117,7 +121,7 @@ const App: React.FC = () => {
     let ethereum: any;
     ethereum = window.ethereum;
 
-		if (ethereum) {
+		if (ethereum && currentAccount) {
 			const provider = new ethers.providers.Web3Provider(ethereum);
 			const signer = provider.getSigner();
 			const userManagerContractEther = new ethers.Contract(USER_MANAGER_CONTRACT_ADDRESS, UserManagerContractABI.abi, signer);
@@ -128,9 +132,9 @@ const App: React.FC = () => {
 			console.log('Ethereum object not found');
       setIsLoading(false);
 		}
-	}, []);
+	}, [currentAccount]);
 
-  //create a user
+  // create user handler
   const addUserHandler = async (toCreateUser: UserModel) => {
     const {name, lastName, telephoneNumber, email, age, ipfsHash, personalLink, tags } = toCreateUser;
     setIsLoading(true);
@@ -142,6 +146,7 @@ const App: React.FC = () => {
     fetchAllUsers(userManagerContract);
   };
 
+  // update User handler
   const onUpdateUserHandler = async (toUpdateUser: UserModel) => {
     if (toUpdateUser === null) {
       return;
@@ -201,11 +206,15 @@ const App: React.FC = () => {
             />
 
           }
-          <UserList 
-            usersList={userList || onLoadData}
-            deleteUser={onDeleteHandler}
-            updateUserHandler={onUpdateUserHandler}
-          />
+          {
+            userList && userList!.length > 0 ?
+            <UserList 
+              usersList={userList || onLoadData}
+              deleteUser={onDeleteHandler}
+              updateUserHandler={onUpdateUserHandler}
+            />
+            : ''
+          }
         </>)
           :
         <p className="paragraph-grey"> Loading ...</p>

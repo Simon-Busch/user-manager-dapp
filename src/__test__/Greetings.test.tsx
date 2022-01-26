@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Greetings from '../components/Greetings/Greetings';
 
 test('renders greetings component', () => {
-  render(<Greetings />);
+  render(<Greetings account="john" />);
   const welcomeElement = screen.getByText(/Hey ! Welcome back/i);
   expect(welcomeElement).toBeInTheDocument();
 });

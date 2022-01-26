@@ -1,7 +1,7 @@
-import React from 'react';
-import User from '../User/User';
-import { UserModel } from '../../model/User.model';
-import './UserList.css';
+import React from "react";
+import User from "../User/User";
+import { UserModel } from "../../model/User.model";
+import "./UserList.css";
 
 interface UserListProps {
   usersList: UserModel[];
@@ -15,7 +15,7 @@ const UserList: React.FC<UserListProps> = (props) => {
       {props.usersList.map((user) => {
         return (
           <User
-            key={user.id ? user.id : Math.random()*155555}
+            key={user.id ? user.id : Math.random() * 155555}
             id={user.id}
             name={user.name}
             lastName={user.lastName}
@@ -28,7 +28,7 @@ const UserList: React.FC<UserListProps> = (props) => {
             deleteUser={props.deleteUser}
             updateUser={props.updateUserHandler}
           />
-        )
+        );
       })}
     </ul>
   );
