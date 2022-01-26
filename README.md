@@ -1,11 +1,11 @@
 # User Manager Dapp
 
 ## Use case
-On this application, the user should be able to :
-- Create contact
-- View contact details 
-- Update contact details
-- Delete contact
+On this application, you are able to :
+- Create user
+- View user details 
+- Update user details
+- Delete user
 
 For reference, the user model is the following:
 - Name
@@ -18,9 +18,12 @@ For reference, the user model is the following:
 - Tags
 
 ## Stack used
+Front-end:
 - React
 - Typescript
 - HTML5/CSS3
+
+Back-end is done on Ethereum blockchain with:
 - Solidity
 - Hardhat
 
@@ -50,12 +53,12 @@ In addition to MetaMask, you'll need ETH that you can get on various faucet.
 |Other faucet| | [https://faucets.chain.link/rinkeby](https://faucets.chain.link/rinkeby)
 ## Hardhat
 
-If you do any changes in the SmartContract, first, run the tests:
+⚠️ ⚠️If you do any changes in the SmartContract, first, run the tests:
 
 ```bash
 npx hardhat test
 ```
-You will also need to create a .env with the following variables:
+Then, you will also need to create a .env with the following variables:
 - URL_INFURA="YOUR INFURA DEPLOYMENT ADDRESS"
 - ACCOUNT_PRIVATE="YOUR PRIVATE ACCOUNT KEY FOR METAMASK"
 
@@ -65,10 +68,11 @@ NB: if you want to upload a new smart contract, make sure you take the infura ke
 ```bash
 npx hardhat run scripts/deploy.js --network rinkeby
 ```
+### Update needed in front-end
+If you updated the smart contract, update the component contractAddress.ts and enter the new contract address given by the above command.
 
 ## React | Typescript
-### Update needed
-If you updated the smart contract, update the component contractAddress.ts to have the new contract address given by the above command.
+
 ### Testing
 Make sure all tests are running smoothly with the following command:
 ```bash
