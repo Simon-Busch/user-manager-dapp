@@ -127,7 +127,7 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
           value={props.defaultPersonalLink}
         />
         <Input
-          label={"Enter your user tag"}
+          label={`Enter your user tag, separated with a "," and no space`}
           reference={tagInputRef}
           type={"text"}
           value={props.defaultTags}

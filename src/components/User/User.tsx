@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UserModel } from "../../model/User.model";
 import { User as UserIcon, AtSign, Phone, Link2, X, Edit } from "react-feather";
 import UserCreation from "../UserCreation/UserCreation";
@@ -13,6 +13,7 @@ type Props = UserModel & UserProps;
 
 const User: React.FC<Props> = (props) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [ tagsArray, setTagsArray ] = useState<string[]>(['']);
 
   const deleteHandler = () => {
     props.deleteUser(props.id);
@@ -21,6 +22,14 @@ const User: React.FC<Props> = (props) => {
   const editHandler = () => {
     setIsEditing(!isEditing);
   };
+  useEffect(() => {
+    if (props.tags && props.tags.includes(',')) {
+      setTagsArray(props.tags.split(','));
+    } else {
+      setTagsArray([props.tags]);
+    }
+  }, [props.tags])
+
   return (
     <>
       {isEditing === false ? (
@@ -64,7 +73,9 @@ const User: React.FC<Props> = (props) => {
               <p>{props.personalLink}</p>
             </a>
             <div>
-              <p className="tags">{props.tags}</p>
+              {tagsArray.map(tag => {
+                return <p className="tags">{tag}</p>
+              })}
             </div>
           </div>
           <div className="user-container-4">
