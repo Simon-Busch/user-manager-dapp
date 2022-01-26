@@ -168,6 +168,7 @@ const App: React.FC = () => {
     await tx.wait();
     toast.success('User deleted!');
     setIsLoading(false);
+    fetchAllUsers(userManagerContract);
   }
   
   return (
