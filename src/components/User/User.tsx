@@ -73,8 +73,8 @@ const User: React.FC<Props> = (props) => {
               <p>{props.personalLink}</p>
             </a>
             <div>
-              {tagsArray.map(tag => {
-                return <p className="tags">{tag}</p>
+              {tagsArray.map((tag, index) => {
+                return <p key={index} className="tags">{tag}</p>
               })}
             </div>
           </div>
