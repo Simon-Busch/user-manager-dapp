@@ -77,7 +77,18 @@
 
 
 .edit-container {
-  width: 100%;
+  width: 90vw;
   display:flex;
-  
+  flex-direction: column;
+  border: 1px solid rgb(37,60,79);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.edit-container__button {
+  align-self: flex-end;
+  justify-self: flex-start;
+
 }

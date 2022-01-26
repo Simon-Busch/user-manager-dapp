@@ -84,26 +84,30 @@ const User: React.FC<Props> = (props) => {
         </div>
       ) : (
         <div className="edit-container">
-          <Edit
-            color={"white"}
-            size="15"
-            strokeWidth="1.2"
-            onClick={editHandler}
-          />
-          <UserCreation
-            defaultName={props.name}
-            defaultLastName={props.lastName}
-            defaultTelephoneNumber={props.telephoneNumber}
-            defaultEmail={props.email}
-            defaultAge={props.age}
-            defaultPersonalLink={props.personalLink}
-            defaultIpfsHash={props.ipfsHash}
-            defaultTags={props.tags}
-            defaultId={props.id}
-            isEditing={true}
-            title={"Update User"}
-            onUpdateUserHandler={props.updateUser}
-          />
+          <div className="edit-container__button">
+            <Edit
+              color={"white"}
+              size="25"
+              strokeWidth="1.4"
+              onClick={editHandler}
+            />
+          </div>
+          <div>
+            <UserCreation
+              defaultName={props.name}
+              defaultLastName={props.lastName}
+              defaultTelephoneNumber={props.telephoneNumber}
+              defaultEmail={props.email}
+              defaultAge={props.age}
+              defaultPersonalLink={props.personalLink}
+              defaultIpfsHash={props.ipfsHash}
+              defaultTags={props.tags}
+              defaultId={props.id}
+              isEditing={true}
+              title={"Update User"}
+              onUpdateUserHandler={props.updateUser}
+            />
+          </div>
         </div>
       )}
     </>
