@@ -22,9 +22,7 @@ interface userCreationProps {
 }
 
 const UserCreation: React.FC<userCreationProps> = (props) => {
-  const [ipfsHash, setIpfsHash] = useState<string>(
-    "QmWCVgLqsoa5MH8q2USpY2i3UCbdiyNDjqh9TBCs8Fh4KK"
-  );
+  const [ipfsHash, setIpfsHash] = useState<string>("");
   const nameInputRef = useRef<HTMLInputElement>(null);
   const lastNameInputRef = useRef<HTMLInputElement>(null);
   const telephoneNumberInputRef = useRef<HTMLInputElement>(null);
@@ -42,7 +40,7 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
       ipfsHash &&
       tagInputRef.current!.value &&
       +ageInputRef.current!.value &&
-      +telephoneNumberInputRef.current!.value 
+      +telephoneNumberInputRef.current!.value
     ) {
       const createdUser: UserModel = {
         name: nameInputRef.current!.value,
@@ -63,8 +61,7 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
   const editHandler = (event: React.FormEvent) => {
     let imgHash: string = "";
     if (props.defaultIpfsHash) {
-      imgHash =
-        props.defaultIpfsHash !== ipfsHash ? ipfsHash : props.defaultIpfsHash;
+      imgHash = ipfsHash !== "" ? ipfsHash : props.defaultIpfsHash;
     }
 
     const updatedUser: UserModel = {
