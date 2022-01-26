@@ -142,7 +142,6 @@ const App: React.FC = () => {
     await tx.wait();
     toast.success('User created!');
     setIsLoading(false);
-    // change later for events
     fetchAllUsers(userManagerContract);
   };
 
@@ -158,7 +157,6 @@ const App: React.FC = () => {
     await tx.wait();
     toast.success('User Updated!');
     setIsLoading(false);
-    // change later for events
     fetchAllUsers(userManagerContract);
   };
 
