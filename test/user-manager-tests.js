@@ -7,7 +7,7 @@ describe("UserManager contract test -------------", function () {
   let owner;
 
   beforeEach(async () => {
-    [owner ] = await ethers.getSigners();
+    [ owner ] = await ethers.getSigners();
     UserManager = await ethers.getContractFactory("UserManager");
     userManagerContract = await UserManager.deploy();
     await userManagerContract.deployed();

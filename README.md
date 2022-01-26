@@ -63,12 +63,12 @@ NB: if you want to upload a new smart contract, make sure you take the infura ke
 
 ### Deploy your smart contract
 ```bash
-npx hardhat run scripts/deploy.js
+npx hardhat run scripts/deploy.js --network rinkeby
 ```
 
 ## React | Typescript
 ### Update needed
-Update the component App.tsx to have the new contract address given by the above command.
+If you updated the smart contract, update the component contractAddress.ts to have the new contract address given by the above command.
 ### Testing
 Make sure all tests are running smoothly with the following command:
 ```bash
