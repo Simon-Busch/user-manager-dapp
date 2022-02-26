@@ -11,24 +11,36 @@ interface UserProps {
 
 type Props = UserModel & UserProps;
 
-const User: React.FC<Props> = (props) => {
+const User: React.FC<Props> = ({
+  deleteUser,
+  updateUser,
+  id,
+  tags,
+  ipfsHash,
+  name,
+  age,
+  lastName,
+  email,
+  telephoneNumber,
+  personalLink
+}) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [ tagsArray, setTagsArray ] = useState<string[]>(['']);
+  const [tagsArray, setTagsArray] = useState<string[]>([""]);
 
   const deleteHandler = () => {
-    props.deleteUser(props.id);
+    deleteUser(id);
   };
 
   const editHandler = () => {
     setIsEditing(!isEditing);
   };
   useEffect(() => {
-    if (props.tags && props.tags.includes(',')) {
-      setTagsArray(props.tags.split(','));
+    if (tags && tags.includes(",")) {
+      setTagsArray(tags.split(","));
     } else {
-      setTagsArray([props.tags]);
+      setTagsArray([tags]);
     }
-  }, [props.tags])
+  }, [tags]);
 
   return (
     <>
@@ -36,45 +48,49 @@ const User: React.FC<Props> = (props) => {
         <div className="user-container">
           <div className="user-container-1">
             <img
-              src={`https://gateway.ipfs.io/ipfs/${props.ipfsHash}`}
+              src={`https://gateway.ipfs.io/ipfs/${ipfsHash}`}
               className="user-img"
-              alt={`${props.name} avatar`}
+              alt={`${name} avatar`}
             />
           </div>
           <div className="user-container-2">
             <div>
               <h3>
                 <UserIcon color={"white"} size="15" strokeWidth="1.2" />
-                {props.name}, {props.age}
+                {name}, {age}
               </h3>
             </div>
             <div>
-              <p style={{ marginLeft: "18px" }}>{props.lastName}</p>
+              <p style={{ marginLeft: "18px" }}>{lastName}</p>
             </div>
           </div>
           <div className="user-container-3">
             <p>
               <AtSign color={"white"} size="15" strokeWidth="1.2" />{" "}
-              {props.email}
+              {email}
             </p>
             <p>
               <Phone color={"white"} size="15" strokeWidth="1.2" />{" "}
-              {props.telephoneNumber}
+              {telephoneNumber}
             </p>
           </div>
           <div className="user-container-4">
             <a
-              href={props.personalLink}
+              href={personalLink}
               target="_blank"
               rel="noreferrer"
               className="paragraph-grey user-link"
             >
               <Link2 color={"white"} size="15" strokeWidth="1.2" />
-              <p>{props.personalLink}</p>
+              <p>{personalLink}</p>
             </a>
             <div>
               {tagsArray.map((tag, index) => {
-                return <p key={index} className="tags">{tag}</p>
+                return (
+                  <p key={index} className="tags">
+                    {tag}
+                  </p>
+                );
               })}
             </div>
           </div>
@@ -105,18 +121,18 @@ const User: React.FC<Props> = (props) => {
           </div>
           <div>
             <UserCreation
-              defaultName={props.name}
-              defaultLastName={props.lastName}
-              defaultTelephoneNumber={props.telephoneNumber}
-              defaultEmail={props.email}
-              defaultAge={props.age}
-              defaultPersonalLink={props.personalLink}
-              defaultIpfsHash={props.ipfsHash}
-              defaultTags={props.tags}
-              defaultId={props.id}
+              defaultName={name}
+              defaultLastName={lastName}
+              defaultTelephoneNumber={telephoneNumber}
+              defaultEmail={email}
+              defaultAge={age}
+              defaultPersonalLink={personalLink}
+              defaultIpfsHash={ipfsHash}
+              defaultTags={tags}
+              defaultId={id}
               isEditing={true}
               title={"Update User"}
-              onUpdateUserHandler={props.updateUser}
+              onUpdateUserHandler={updateUser}
             />
           </div>
         </div>

@@ -21,7 +21,21 @@ interface userCreationProps {
   isEditing: boolean;
 }
 
-const UserCreation: React.FC<userCreationProps> = (props) => {
+const UserCreation: React.FC<userCreationProps> = ({
+  onAddUser,
+  onUpdateUserHandler,
+  title,
+  defaultName,
+  defaultLastName,
+  defaultTelephoneNumber,
+  defaultEmail,
+  defaultAge,
+  defaultPersonalLink,
+  defaultId,
+  defaultIpfsHash,
+  defaultTags,
+  isEditing
+}) => {
   const [ipfsHash, setIpfsHash] = useState<string>("");
   const nameInputRef = useRef<HTMLInputElement>(null);
   const lastNameInputRef = useRef<HTMLInputElement>(null);
@@ -52,7 +66,7 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
         ipfsHash: ipfsHash,
         tags: tagInputRef.current!.value,
       };
-      props.onAddUser!(createdUser);
+      onAddUser!(createdUser);
     } else {
       alert("Please fill all fields");
     }
@@ -60,12 +74,12 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
 
   const editHandler = (event: React.FormEvent) => {
     let imgHash: string = "";
-    if (props.defaultIpfsHash) {
-      imgHash = ipfsHash !== "" ? ipfsHash : props.defaultIpfsHash;
+    if (defaultIpfsHash) {
+      imgHash = ipfsHash !== "" ? ipfsHash : defaultIpfsHash;
     }
 
     const updatedUser: UserModel = {
-      id: props.defaultId,
+      id: defaultId,
       name: nameInputRef.current!.value,
       lastName: lastNameInputRef.current!.value,
       telephoneNumber: +telephoneNumberInputRef.current!.value,
@@ -75,7 +89,7 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
       ipfsHash: imgHash,
       tags: tagInputRef.current!.value,
     };
-    props.onUpdateUserHandler!(updatedUser);
+    onUpdateUserHandler!(updatedUser);
   };
 
   const captureHandler = (text: string) => {
@@ -84,57 +98,57 @@ const UserCreation: React.FC<userCreationProps> = (props) => {
 
   return (
     <div className="user-creation-container">
-      <h2>{props.title}</h2>
+      <h2>{title}</h2>
 
       <div>
         <Input
           label={"Enter your user name"}
           reference={nameInputRef}
           type={"text"}
-          value={props.defaultName}
+          value={defaultName}
         />
         <Input
           label={"Enter your user last name"}
           reference={lastNameInputRef}
           type={"text"}
-          value={props.defaultLastName}
+          value={defaultLastName}
         />
         <Input
           label={"Enter your user telephone number"}
           reference={telephoneNumberInputRef}
           type={"number"}
-          value={props.defaultTelephoneNumber}
+          value={defaultTelephoneNumber}
         />
         <Input
           label={"Enter your user email"}
           reference={emailInputRef}
           type={"text"}
-          value={props.defaultEmail}
+          value={defaultEmail}
         />
         <Input
           label={"Enter your user age"}
           reference={ageInputRef}
           type={"number"}
-          value={props.defaultAge}
+          value={defaultAge}
         />
         <Input
           label={"Enter your user personnal link"}
           reference={personnalLinkInputRef}
           type={"text"}
-          value={props.defaultPersonalLink}
+          value={defaultPersonalLink}
         />
         <Input
           label={`Enter your user tag, separated with a "," and no space`}
           reference={tagInputRef}
           type={"text"}
-          value={props.defaultTags}
+          value={defaultTags}
         />
         <Capture onCapture={captureHandler} />
       </div>
 
       <Button
         text={"Submit"}
-        onAction={props.isEditing === true ? editHandler : formHandler}
+        onAction={isEditing === true ? editHandler : formHandler}
       />
     </div>
   );

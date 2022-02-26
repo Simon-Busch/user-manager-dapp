@@ -9,14 +9,14 @@ interface InputProps {
   value?: string | number;
 }
 
-const Input: React.FC<InputProps> = (props) => {
+const Input: React.FC<InputProps> = ({label, type, reference, value}) => {
   return (
     <div className="input-container">
-      <label>{props.label} </label>
+      <label>{label} </label>
       <input
-        type={props.type}
-        ref={props.reference}
-        defaultValue={props?.value || ""}
+        type={type}
+        ref={reference}
+        defaultValue={value || ""}
         required
       />
     </div>

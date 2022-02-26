@@ -9,10 +9,14 @@ interface UserListProps {
   updateUserHandler: (updatedUser: any) => void;
 }
 
-const UserList: React.FC<UserListProps> = (props) => {
+const UserList: React.FC<UserListProps> = ({
+  usersList,
+  deleteUser,
+  updateUserHandler
+}) => {
   return (
     <ul>
-      {props.usersList.map((user) => {
+      {usersList.map((user) => {
         return (
           <User
             key={user.id ? user.id : Math.random() * 155555}
@@ -25,8 +29,8 @@ const UserList: React.FC<UserListProps> = (props) => {
             ipfsHash={user.ipfsHash}
             personalLink={user.personalLink}
             tags={user.tags}
-            deleteUser={props.deleteUser}
-            updateUser={props.updateUserHandler}
+            deleteUser={deleteUser}
+            updateUser={updateUserHandler}
           />
         );
       })}

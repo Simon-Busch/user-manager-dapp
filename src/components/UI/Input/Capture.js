@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import ipfs from '../../../utils/ipfs';
-import './Input.css'
+import React, { useState, useEffect } from "react";
+import ipfs from "../../../utils/ipfs";
+import "./Input.css";
 
-const Capture = ({onCapture}) => {
-  const [buffer,setBuffer] = useState('');
+const Capture = ({ onCapture }) => {
+  const [buffer, setBuffer] = useState("");
 
   const captureFile = async (event) => {
     event.preventDefault();
@@ -12,19 +12,19 @@ const Capture = ({onCapture}) => {
     await reader.readAsArrayBuffer(file);
     reader.onloadend = () => {
       setBuffer(Buffer.from(reader.result));
-    }
-  }
+    };
+  };
 
   useEffect(() => {
     const ipfsHandler = async () => {
       await ipfs.add(buffer, (error, result) => {
-        if(error) {
+        if (error) {
           console.error(error);
           return;
         }
         onCapture(result[0].hash);
-      })
-    }
+      });
+    };
     if (buffer) {
       ipfsHandler();
     }
@@ -41,7 +41,7 @@ const Capture = ({onCapture}) => {
         onChange={(e) => captureFile(e)}
       />
       <label htmlFor="file">Upload</label>
-     </div>
+    </div>
   );
 };
 
