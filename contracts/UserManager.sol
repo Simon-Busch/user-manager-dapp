@@ -49,7 +49,6 @@ contract UserManager {
         });
 
         users.push(newUser);
-        //users[users.length-1].tags.push(_tag);
         userId += 1;
     }
 
