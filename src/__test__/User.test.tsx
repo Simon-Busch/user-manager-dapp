@@ -70,23 +70,6 @@ describe("when feeded with various props", () => {
     );
     expect(screen.getByText(/3232323/)).toBeInTheDocument();
   });
-  it("should have a age in the User", () => {
-    render(
-      <User
-        name="test name User"
-        lastName="test lastName User"
-        email="test email User"
-        telephoneNumber={3232323}
-        age={32}
-        tags={"solidity"}
-        ipfsHash={"dummy ifsHash"}
-        personalLink={"www.google.com"}
-        updateUser={() => {}}
-        deleteUser={() => {}}
-      />
-    );
-    expect(screen.getByText(/32/)).toBeInTheDocument();
-  });
   it("should have an email in the User", () => {
     render(
       <User
