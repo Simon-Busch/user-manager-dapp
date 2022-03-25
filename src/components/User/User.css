@@ -1,16 +1,16 @@
 .user-container {
   border: 1px solid rgb(37,60,79);
   width: 250px;
-  height: 320px;
+  min-height: 320px;
   padding: .7rem;
-  /* display: grid;
-  grid-template-columns: 1fr 2fr 2fr 3fr 20px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
   margin: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 16px rgba(255,255,255, .2);
 }
 
 .user-container-1 {
@@ -53,6 +53,13 @@
   display: flex;
   flex-direction: column;
   justify-content:space-around;
+}
+
+.user-container-4 div {
+  display: flex;
+  flex-direction: row;
+  max-width: 200px;
+  flex-wrap: wrap;
 }
 
 .user-link-container {
@@ -98,9 +105,9 @@
   margin: 0;
   border: 1px solid rgb(82,115,124);
   padding: .2rem .8rem;
-  margin-right: .4rem;
   border-radius: 25px;
   text-align: center;
+  margin: .2rem;
 }
 
 
