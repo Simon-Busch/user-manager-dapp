@@ -1,0 +1,7 @@
+.userlist-container ul {
+  max-width: 90vw;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

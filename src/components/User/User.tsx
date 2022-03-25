@@ -46,35 +46,55 @@ const User: React.FC<Props> = ({
     <>
       {isEditing === false ? (
         <div className="user-container">
+          <div className="user-container-buttons">
+            <Edit
+              color={"white"}
+              size="20"
+              strokeWidth="1.4"
+              onClick={editHandler}
+              style={{
+                marginRight:"10px",
+                cursor:"pointer"
+              }}
+            />
+            <X
+              color={"red"}
+              size="20"
+              strokeWidth="1.4"
+              onClick={deleteHandler}
+              style={{
+                marginRight:"10px",
+                cursor:"pointer"
+              }}
+            />
+          </div>
           <div className="user-container-1">
             <img
               src={`https://gateway.ipfs.io/ipfs/${ipfsHash}`}
               className="user-img"
               alt={`${name} avatar`}
             />
-          </div>
-          <div className="user-container-2">
             <div>
-              <h3>
-                <UserIcon color={"white"} size="15" strokeWidth="1.2" />
-                {name}, {age}
-              </h3>
-            </div>
-            <div>
-              <p style={{ marginLeft: "18px" }}>{lastName}</p>
+              <div>
+                <h3>
+                  <UserIcon color={"white"} size="15" strokeWidth="1.2" style={{marginRight:"10px"}} />
+                  {name}, {age}
+                </h3>
+              </div>
+              <div>
+                <p style={{ marginLeft: "18px" }}>{lastName}</p>
+              </div>
             </div>
           </div>
           <div className="user-container-3">
             <p>
-              <AtSign color={"white"} size="15" strokeWidth="1.2" />{" "}
+              <AtSign color={"white"} size="15" strokeWidth="1.2" style={{marginRight:"10px"}} />{" "}
               {email}
             </p>
             <p>
-              <Phone color={"white"} size="15" strokeWidth="1.2" />{" "}
+              <Phone color={"white"} size="15" strokeWidth="1.2" style={{marginRight:"10px"}} />{" "}
               {telephoneNumber}
             </p>
-          </div>
-          <div className="user-container-4">
             <a
               href={personalLink}
               target="_blank"
@@ -84,6 +104,9 @@ const User: React.FC<Props> = ({
               <Link2 color={"white"} size="15" strokeWidth="1.2" />
               <p>{personalLink}</p>
             </a>
+          </div>
+          <div className="user-container-4">
+            <p className="paragraph-grey" style={{textAlign:"center", marginBottom:"10px"}}>Tags</p>
             <div>
               {tagsArray.map((tag, index) => {
                 return (
@@ -93,20 +116,6 @@ const User: React.FC<Props> = ({
                 );
               })}
             </div>
-          </div>
-          <div className="user-container-4">
-            <Edit
-              color={"white"}
-              size="20"
-              strokeWidth="1.4"
-              onClick={editHandler}
-            />
-            <X
-              color={"red"}
-              size="20"
-              strokeWidth="1.4"
-              onClick={deleteHandler}
-            />
           </div>
         </div>
       ) : (

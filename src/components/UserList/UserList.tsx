@@ -15,26 +15,28 @@ const UserList: React.FC<UserListProps> = ({
   updateUserHandler
 }) => {
   return (
-    <ul>
-      {usersList.map((user) => {
-        return (
-          <User
-            key={user.id ? user.id : Math.random() * 155555}
-            id={user.id}
-            name={user.name}
-            lastName={user.lastName}
-            telephoneNumber={user.telephoneNumber}
-            email={user.email}
-            age={user.age}
-            ipfsHash={user.ipfsHash}
-            personalLink={user.personalLink}
-            tags={user.tags}
-            deleteUser={deleteUser}
-            updateUser={updateUserHandler}
-          />
-        );
-      })}
-    </ul>
+    <div className="userlist-container">
+      <ul>
+        {usersList.map((user) => {
+          return (
+            <User
+              key={user.id ? user.id : Math.random() * 155555}
+              id={user.id}
+              name={user.name}
+              lastName={user.lastName}
+              telephoneNumber={user.telephoneNumber}
+              email={user.email}
+              age={user.age}
+              ipfsHash={user.ipfsHash}
+              personalLink={user.personalLink}
+              tags={user.tags}
+              deleteUser={deleteUser}
+              updateUser={updateUserHandler}
+            />
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

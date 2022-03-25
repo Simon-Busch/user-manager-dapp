@@ -1,22 +1,48 @@
 .user-container {
   border: 1px solid rgb(37,60,79);
-  width: 90vw;
-  min-height: 80px;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: 1fr 2fr 2fr 3fr 20px;
+  width: 250px;
+  height: 320px;
+  padding: .7rem;
+  /* display: grid;
+  grid-template-columns: 1fr 2fr 2fr 3fr 20px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
+  margin: 2rem;
 }
 
 .user-container-1 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content:space-around;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
-.user-container-2,
-.user-container-3{
+.user-container-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.user-container-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:space-around;
+  padding: 1rem;
+}
+
+.user-container-3 p {
+  margin-bottom: .5rem;
+}
+
+.user-container-2{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,6 +54,7 @@
   flex-direction: column;
   justify-content:space-around;
 }
+
 .user-link-container {
   display:flex;
   flex-direction: row;
