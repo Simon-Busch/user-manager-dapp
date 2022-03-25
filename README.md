@@ -79,6 +79,11 @@ Make sure all tests are running smoothly with the following command:
 npm run test
 ```
 
+## Check the application
+In order to check the application, go to :
+https://623d69c4936b7517243d8df5--stirring-marigold-396d0e.netlify.app/
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
